@@ -9,14 +9,18 @@ function addToDisplay(value) {
     }
     if (value >= 0 && value <= 9) {
         document.getElementById("result").value += value;
+    } else if (value === ".") {
+        if (!document.getElementById("result").value.contains('.')) {
+            document.getElementById("result").value += ".";
+        }
     } else if (value === "+" || value === "-" || value === "*" || value === "/") {
-       if (operand1 === "") {
-           if (document.getElementById("result").value === "") {
-               operand1 = 0;
-           } else {
-               operand1 = document.getElementById("result").value;
-           }
-       }
+        if (operand1 === "") {
+            if (document.getElementById("result").value === "") {
+                operand1 = 0;
+            } else {
+                operand1 = document.getElementById("result").value;
+            }
+        }
         if (currentOperator != null) {
             calculate();
         }

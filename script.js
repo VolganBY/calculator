@@ -10,7 +10,7 @@ function addToDisplay(value) {
     if (value >= 0 && value <= 9) {
         document.getElementById("result").value += value;
     } else if (value === ".") {
-        if (!document.getElementById("result").value.contains('.')) {
+        if (document.getElementById("result").value.indexOf('.') === -1) {
             document.getElementById("result").value += ".";
         }
     } else if (value === "+" || value === "-" || value === "*" || value === "/") {
@@ -62,16 +62,3 @@ clearDisplay = () => {
     currentOperator = "";
 }
 
-/*document.addEventListener("keydown", function(event) {
-    const key = event.key;
-
-    if (key >= "0" && key <= "9") {
-        addToDisplay(key);
-    } else if (key === "+" , key === "-" , key === "*" , key === "/") {
-        operand1 = document.getElementById("display").value;
-        currentOperator = key;
-        shouldClearDisplay = true;
-    } else if (key === "="  key === "Enter") {
-        calculate();
-    }
-});*/

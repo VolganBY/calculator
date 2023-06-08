@@ -9,6 +9,7 @@ function addToDisplay(value) {
     }
     if (value >= 0 && value <= 9) {
         document.getElementById("result").value += value;
+
     } else if (value === ".") {
         if (document.getElementById("result").value.indexOf('.') === -1) {
             document.getElementById("result").value += ".";
@@ -31,7 +32,6 @@ function addToDisplay(value) {
 
 function calculate() {
     const operand2 = document.getElementById("result").value;
-
     let result;
     switch (currentOperator) {
         case "+":
@@ -47,7 +47,7 @@ function calculate() {
             result = parseFloat(operand1) / parseFloat(operand2);
             break;
         default:
-            return;
+            return
     }
 
     document.getElementById("result").value = result.toString();

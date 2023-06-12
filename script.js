@@ -2,12 +2,17 @@ let operand1 = "";
 let currentOperator = "";
 let shouldClearDisplay = false;
 let isOperatorEntered = false;
+let isResultDisplayed = false;
 function addToDisplay(value) {
     if (shouldClearDisplay) {
         document.getElementById("result").value = "";
         shouldClearDisplay = false;
     }
     if (value >= 0 && value <= 9) {
+        if (isResultDisplayed) {
+            clearDisplay();
+            isResultDisplayed = false;
+        }
         isOperatorEntered = false;
         if (document.getElementById("result").value === "0" && value === 0) {
         } else {
@@ -67,10 +72,14 @@ function calculate() {
     operand1 = result.toString();
     currentOperator = "";
     shouldClearDisplay = false;
+    isOperatorEntered = false;
+    isResultDisplayed = true;
 }
 
 clearDisplay = () => {
     document.getElementById("result").value = "";
     operand1 = "";
     currentOperator = "";
+    isOperatorEntered = false;
+    isResultDisplayed = false;
 }

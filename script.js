@@ -1,60 +1,75 @@
-let operand1 = "";
-let currentOperator = "";
-let shouldClearDisplay = false;
-let isOperatorEntered = false;
-let isResultDisplayed = false;
-function addToDisplay(value) {
-    if (shouldClearDisplay) {
-        document.getElementById("result").value = "";
-        shouldClearDisplay = false;
+let operand1 = "";// переменная для хранения первого операнда
+let currentOperator = "";// переменная для хранения текущего оператора
+let shouldClearDisplay = false;// флаг, указывающий, нужно ли очистить дисплей перед следующим вводом
+let isOperatorEntered = false;// флаг, указывающий, был ли уже введен оператор
+let isResultDisplayed = false;// флаг, указывающий, был ли уже выведен результат на дисплей
+
+addToDisplay = (value) => { // объявление функции addToDisplay с параметром value
+    if (shouldClearDisplay) { // проверка, нужно ли очистить дисплей перед вводом нового значения
+        document.getElementById("result").value = "";// очистка дисплея
+        shouldClearDisplay = false;//установка флага shouldClearDisplay в false
     }
-    if (value >= 0 && value <= 9) {
-        if (isResultDisplayed) {
-            clearDisplay();
-            isResultDisplayed = false;
+    if (value >= 0 && value <= 9) { //проверка, является ли введенное значение цифрой
+        if (isResultDisplayed) { //проверка, был ли уже выведен результат на дисплей
+            clearDisplay(); //вызов функции очистки дисплея
+            isResultDisplayed = false; // установка флага isResultDisplayed в false
         }
-        isOperatorEntered = false;
-        if (document.getElementById("result").value === "0" && value === 0) {
+        isOperatorEntered = false; //установка флага isOperatorEntered в false
+        if (document.getElementById("result").value === "0" && value === 0) { //проверка, является ли текущее значение дисплея равным нулю и был ли введен ноль
         } else {
-            document.getElementById("result").value += value;
+            document.getElementById("result").value += value; //добавление введенного значения на дисплей
         }
-    } else if (value === ".") {
-        if (document.getElementById("result").value.indexOf('.') === -1) {
-            document.getElementById("result").value += ".";
+    } else if (value === ".") { //проверка, является ли введенное значение точкой
+        if (document.getElementById("result").value.indexOf('.') === -1) { //проверка, есть ли уже точка на дисплее
+            document.getElementById("result").value += "."; //добавление точки на дисплей
         }
-    } else if (value === "+" || value === "-" || value === "*" || value === "/") {
-        if (isOperatorEntered) {
-            return;
+    }
+    if (value === "+" || value === "-" || value === "*" || value === "/") {// проверка, является ли введенное значение оператором
+        if (isOperatorEntered) { //проверка, был ли уже введен оператор
+            currentOperator = value;
+            return; //выход из функции
         }
-        isOperatorEntered = true;
-        if (operand1 === "") {
-            if (document.getElementById("result").value === "") {
-                operand1 = 0;
+        console.log("ошибка");
+        isOperatorEntered = true; //установка флага isOperatorEntered в true
+        console.log('ошибка');
+        if (operand1 === "") {// проверка, было ли уже введено первое число
+            if (document.getElementById("result").value === "") { //проверка, является ли текущее значение дисплея пустым
+                operand1 = 0; //установка значения первого операнда в 0
+                console.log('ошибка');
             } else {
-                operand1 = document.getElementById("result").value;
+                operand1 = document.getElementById("result").value; //установка значения первого операнда в текущее значение дисплея
+                console.log('ошибка');
             }
         }
-        if (currentOperator != null) {
-            calculate();
+        console.log('ошибка');
+        if (currentOperator != null) { //проверка, был ли уже выбран оператор
+            console.log('ошибка');
+            calculate(); // вызов функции calculate для выполнения операции с двумя операндами и оператором
+            console.log('ошибка');
         }
-        currentOperator = value;
-        shouldClearDisplay = true;
+        console.log('ошибка');
+        currentOperator = value; //установка значения текущего оператора
+        console.log('ошибка');
+        shouldClearDisplay = true; // установка флага shouldClearDisplay в true, чтобы очистить дисплей перед вводом следующего значения
+        console.log('ошибка');
     }
-    if (currentOperator === "/" && document.getElementById("result").value === "0") {
-        document.getElementById("result").value = "Nelzya delit na nol";
-        operand1 = "";
-        currentOperator = "";
-        shouldClearDisplay = true;
+    console.log('ошибка');
+    if (currentOperator === "/" && document.getElementById("result").value === "0") { //является ли текущее значение дисплея равным нулю при делении на ноль
+        document.getElementById("result").value = "нельзя делить на ноль"; // вывод сообщения об ошибке на дисплей
+        operand1 = ""; // очистка значения первого операнда
+        currentOperator = ""; // очистка значения текущего оператора
+        shouldClearDisplay = true; //установка флага shouldClearDisplay в true, чтобы очистить дисплей перед вводом следующего значения
     }
 }
 
-function calculate() {
-    const operand2 = document.getElementById("result").value;
+calculate = () => { //объявление функции calculate
+    const operand2 = document.getElementById("result").value; //получение значения второго операнда из дисплея
+    // объявление переменной для результата вычислений
     let result;
-    switch (currentOperator) {
-        case "+":
-            result = parseFloat(operand1) + parseFloat(operand2);
-            break;
+    switch (currentOperator) { //проверка значения текущего оператора
+        case "+": //если оператор сложение
+            result = parseFloat(operand1) + parseFloat(operand2); //выполнение операции сложения и сохранение результата в переменную result
+            break; //выход из switch
         case "-":
             result = parseFloat(operand1) - parseFloat(operand2);
             break;
@@ -64,22 +79,23 @@ function calculate() {
         case "/":
             result = parseFloat(operand1) / parseFloat(operand2);
             break;
-        default:
-            return
+        default: //если оператор не является ни одним из вышеперечисленных
+            return // выход из функции
     }
 
-    document.getElementById("result").value = result.toString();
-    operand1 = result.toString();
-    currentOperator = "";
-    shouldClearDisplay = false;
-    isOperatorEntered = false;
-    isResultDisplayed = true;
+    document.getElementById("result").value = result.toString(); //вывод результата на дисплей
+    operand1 = result.toString(); //сохранение результата в первый операнд
+    currentOperator = ""; // очистка значения текущего оператора
+    //shouldClearDisplay = false;// установка флага shouldClearDisplay в false, чтобы не очищать дисплей перед вводом следующего значения
+    // isOperatorEntered = false;// установка флага isOperatorEntered в false
+    isResultDisplayed = false;// установка флага isResultDisplayed в true, чтобы помнить, что результат уже был выведен на дисплей
 }
 
-clearDisplay = () => {
-    document.getElementById("result").value = "";
-    operand1 = "";
-    currentOperator = "";
-    isOperatorEntered = false;
-    isResultDisplayed = false;
+clearDisplay = () => { // объявление функции clearDisplay для очистки дисплея
+    document.getElementById("result").value = ""; // очистка дисплея
+    operand1 = ""; // очистка значения первого операнда
+    currentOperator = ""; //очистка значения текущего оператора
+    shouldClearDisplay = false;
+    isOperatorEntered = false; // установка флага isOperatorEntered в false
+    isResultDisplayed = false; // установка флага isResultDisplayed в false
 }

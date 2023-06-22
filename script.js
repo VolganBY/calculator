@@ -29,31 +29,20 @@ addToDisplay = (value) => { // объявление функции addToDisplay 
             currentOperator = value;
             return; //выход из функции
         }
-        console.log("ошибка");
         isOperatorEntered = true; //установка флага isOperatorEntered в true
-        console.log('ошибка');
         if (operand1 === "") {// проверка, было ли уже введено первое число
             if (document.getElementById("result").value === "") { //проверка, является ли текущее значение дисплея пустым
                 operand1 = 0; //установка значения первого операнда в 0
-                console.log('ошибка');
             } else {
                 operand1 = document.getElementById("result").value; //установка значения первого операнда в текущее значение дисплея
-                console.log('ошибка');
             }
         }
-        console.log('ошибка');
         if (currentOperator != null) { //проверка, был ли уже выбран оператор
-            console.log('ошибка');
             calculate(); // вызов функции calculate для выполнения операции с двумя операндами и оператором
-            console.log('ошибка');
         }
-        console.log('ошибка');
         currentOperator = value; //установка значения текущего оператора
-        console.log('ошибка');
         shouldClearDisplay = true; // установка флага shouldClearDisplay в true, чтобы очистить дисплей перед вводом следующего значения
-        console.log('ошибка');
     }
-    console.log('ошибка');
     if (currentOperator === "/" && document.getElementById("result").value === "0") { //является ли текущее значение дисплея равным нулю при делении на ноль
         document.getElementById("result").value = "нельзя делить на ноль"; // вывод сообщения об ошибке на дисплей
         operand1 = ""; // очистка значения первого операнда

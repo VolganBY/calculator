@@ -5,7 +5,7 @@ let isOperatorEntered = false;
 let isResultDisplayed = false;
 
 addToDisplay = (value) => {
-    if (shouldClearDisplay) {
+    if (shouldClearDisplay && value >= 0 && value <= 9) {
         document.getElementById("result").value = "";
         shouldClearDisplay = false;
     }
@@ -19,7 +19,7 @@ addToDisplay = (value) => {
         } else {
             document.getElementById("result").value += value;
         }
-    } else if (value === ".") { //проверка, является ли введенное значение точкой
+    } else if (value === ".") {
         if (document.getElementById("result").value.indexOf('.') === -1) {
             document.getElementById("result").value += ".";
         }
@@ -57,7 +57,6 @@ addToDisplay = (value) => {
 
 calculate = () => {
     let operand2 = document.getElementById("result").value;
-
     if(operand2 === '') operand2 = operand1;
     let result;
     switch (currentOperator) {
